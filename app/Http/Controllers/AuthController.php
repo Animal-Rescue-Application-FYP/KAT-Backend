@@ -57,7 +57,7 @@ class AuthController extends Controller
             ]);
         } catch (JWTException $exception){
             return response()->json([
-                'status'=> 'unknown_error',
+                'status' => 'unknown_error',
                 'message' => 'Error is occured from server'
             ], 500);
         }
