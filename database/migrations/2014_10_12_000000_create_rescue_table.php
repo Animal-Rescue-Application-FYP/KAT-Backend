@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHelplineTable extends Migration
+class CreateRescueTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,17 @@ class CreateHelplineTable extends Migration
      */
     public function up()
     {
-        Schema::create('helpline', function (Blueprint $table) {
+        Schema::create('rescue', function (Blueprint $table) {
           //  $table->id();
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('animalName');
+            $table->string('category');
+            $table->integer('year');
+            $table->string('gender');
             $table->string('address');
-            $table->string('phone')->unique();
+            $table->string('phone');
+            $table->string('postedBy');
+            $table->text('description');
           //   $table->rememberToken();
             $table->timestamps();
         });
@@ -31,6 +36,6 @@ class CreateHelplineTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('helpline');
+        Schema::dropIfExists('rescue');
     }
 }

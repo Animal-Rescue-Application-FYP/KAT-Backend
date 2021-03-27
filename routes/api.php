@@ -17,6 +17,9 @@ Route::post('/recover', 'App\Http\Controllers\AuthController@recover');
 Route::resource('/helpline', 'App\Http\Controllers\HelplineController')->except([
    'create', 'edit'
 ]);
+Route::resource('/rescue', 'App\Http\Controllers\RescueController')->except([
+    'create', 'edit'
+]);
 
 Route::group(['middleware' => ['jwt.auth']], function() {
    Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
