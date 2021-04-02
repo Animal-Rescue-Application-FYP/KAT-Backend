@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
@@ -16,6 +17,7 @@ class AuthController extends Controller
         $user = new User();
         $user->name =$request->name;
         $user->email =$request->email;
+        $user->phone =$request->phone;
         $user->password =bcrypt($request->password);
         $user->save();
 
@@ -63,14 +65,24 @@ class AuthController extends Controller
         }
     }
 
-    public function getAuthUser(Request $request){
-        $this->validate($request, [
-            'token' => 'required'
-        ]);
+//    public function getAuthUser(Request $request){
+//        $this->validate($request, [
+//            'token' => 'required'
+//        ]);
+//
+//        $user = JWTAuth::authenticate($request->token);
+//        return response()->json(['user' => $user]);
+////        $user = auth()=>user();
+////        return response()=>json(["user"=>$user]);
+//    }
 
-        $user = JWTAuth::authenticate($request->token);
+    public function getAuthUser(Request $request)
+//    : \Illuminate\Http\JsonResponse
+    {
+        $user = auth()->user();
         return response()->json(['user' => $user]);
     }
+
     protected function jsonResponse($data, $code = 200){
         return response()->json($data, $code,
         ['Content-Type' => 'application/json;charset=UTF-8','Charset' => 'utf-8'],JSON_UNESCAPED_UNICODE);

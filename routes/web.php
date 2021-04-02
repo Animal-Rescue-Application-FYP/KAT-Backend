@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Route::get('/user/{id}', 'AuthController@login')=>name('user.login');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
