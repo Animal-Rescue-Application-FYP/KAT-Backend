@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\JsonResponse;
-
+use Validator;
 class AuthController extends Controller
 {
     public $loginAfterSignUp=true;
@@ -65,6 +66,41 @@ class AuthController extends Controller
         }
     }
 
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'name' => 'max:60',
+            'email' => 'string',
+            'phone' => 'string',
+        ]);
+        if ($validator->fails()){
+            return response()->json([
+                'ok' => false,
+                'error' => $validator->messages(),
+            ]);
+        }
+        try {
+            /*$user = User::find($id);
+            if ($user == false) {
+                return response()->json([
+                    "ok" => false,
+                    "error" => "No data is found",
+                ]);
+            }*/
+            $user->update($input);
+            return response()->json([
+                "ok" => true,
+                "message" => "successfully modified"
+            ]);
+        } catch (\Exception $ex) {
+            return response()->json([
+                "ok" => false,
+                "error" => $ex->getMessage(),
+            ]);
+        }
+    }
 //    public function getAuthUser(Request $request){
 //        $this->validate($request, [
 //            'token' => 'required'

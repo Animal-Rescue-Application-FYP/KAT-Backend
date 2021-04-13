@@ -18,6 +18,7 @@ class CreateAssistanceTable extends Migration
             $table->bigIncrements('id');
             $table->string('query');
             $table->string('url');
+            $table->text('description');
           //   $table->rememberToken();
             $table->timestamps();
         });

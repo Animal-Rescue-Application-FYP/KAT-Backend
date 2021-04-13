@@ -17,6 +17,8 @@ class CreateRescueTable extends Migration
           //  $table->id();
             $table->bigIncrements('id');
             $table->string('animalName');
+            //$table->string('image')->nullable();
+            $table->string('image_path');
             $table->string('category');
             $table->integer('year');
             $table->string('gender');
@@ -38,6 +40,9 @@ class CreateRescueTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rescue');
+        //Schema::dropIfExists('rescue');
+        Schema::table('rescue', function (Blueprint $table) {
+            $table->dropColumn('image_path');
+        });
     }
 }

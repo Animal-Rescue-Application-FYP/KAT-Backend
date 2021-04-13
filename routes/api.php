@@ -19,6 +19,8 @@ Route::post('/register', 'App\Http\Controllers\AuthController@register');
 //});
 
 Route::post('/login', 'App\Http\Controllers\AuthController@login');
+Route::post('password/forgot','App\Http\Controllers\ForgotController@forgot');
+Route::post('password/reset','App\Http\Controllers\ForgotController@reset');
 Route::post('/recover', 'App\Http\Controllers\AuthController@recover');
 Route::resource('/helpline', 'App\Http\Controllers\HelplineController')->except([
    'create', 'edit'
@@ -34,6 +36,7 @@ Route::group(['middleware' => ['jwt.auth']], function() {
    Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
 
     Route::get('/currentUser', 'App\Http\Controllers\AuthController@getAuthUser');
+    Route::put('/editCurrentUser', 'App\Http\Controllers\AuthController@update');
 
    Route::get('/test', function(){
        return response()->json(['foo'=>'bar']);
