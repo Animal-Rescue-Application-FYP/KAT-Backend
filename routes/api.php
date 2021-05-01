@@ -3,21 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-//Route::post('/login','App\Http\Controllers\AuthController@login');
-//Route::post('/register','App\Http\Controllers\AuthController@register');
-//
-//Route::group(['middleware' => 'auth.jwt'], function (){
-//Route::post('/logout','App\Http\Controllers\AuthController@logout');
-//
-//});
-
 Route::post('/register', 'App\Http\Controllers\AuthController@register');
-//Route::get('/currentUser', 'App\Http\Controllers\AuthController@getAuthUser');
-
-//Route::get('/currentUser', function (){
-//    return "hello";
-//});
-
 Route::post('/login', 'App\Http\Controllers\AuthController@login');
 Route::post('password/forgot','App\Http\Controllers\ForgotController@forgot');
 Route::post('password/reset','App\Http\Controllers\ForgotController@reset');
